@@ -1,13 +1,25 @@
-# Sample Hardhat Project
+# Coffee By Wallet
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+A decentralised app where an educator, contributor, creator and all kinds of people can get a token of thanks for their service.
+A user can gift a minimal amount of ETH to support their work. <br>
+This Dapp is currently Deployed on <b>Rinkeby Test Network</b>.
 
-Try running some of the following tasks:
+## Tech Stack 
 
-```shell
-npx hardhat help
-npx hardhat test
-GAS_REPORT=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+ - Solidity
+ - Hardhat
+ - Alchemy
+ - Rinkeby
+ - ReactJS
+  
+ ## Smart Contract Deployment
+ 
+ The smart contract has been deployed on <b>Rinkeby Test Network</b>. 
+<br>
+Here's the address: <b>0xc7f2F0A9b17ED4F784Fb012d5885aC2976f767D9</b>
+
+## Screenshots
+Will be added after UI update(very soon).
+
+## Video Demo
+Will be added after UI update(very soon).
