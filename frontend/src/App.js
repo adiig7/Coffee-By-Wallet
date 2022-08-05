@@ -1,7 +1,8 @@
-import abi from './utils/CoffeeByWallet.json';
+import abi from "./utils/CoffeeByWallet.json";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
-import styles from './styles/Home.module.css'
+import styles from "./styles/Home.module.css";
+import pfp from './utils/adii.jpg'
 
 export default function Home() {
   // Contract Address & ABI
@@ -16,18 +17,18 @@ export default function Home() {
 
   const onNameChange = (event) => {
     setName(event.target.value);
-  }
+  };
 
   const onMessageChange = (event) => {
     setMessage(event.target.value);
-  }
+  };
 
   // Wallet connection logic
   const isWalletConnected = async () => {
     try {
       const { ethereum } = window;
 
-      const accounts = await ethereum.request({method: 'eth_accounts'})
+      const accounts = await ethereum.request({ method: "eth_accounts" });
       console.log("accounts: ", accounts);
 
       if (accounts.length > 0) {
@@ -39,29 +40,29 @@ export default function Home() {
     } catch (error) {
       console.log("error: ", error);
     }
-  }
+  };
 
   const connectWallet = async () => {
     try {
-      const {ethereum} = window;
+      const { ethereum } = window;
 
       if (!ethereum) {
         console.log("please install MetaMask");
       }
 
       const accounts = await ethereum.request({
-        method: 'eth_requestAccounts'
+        method: "eth_requestAccounts",
       });
 
       setCurrentAccount(accounts[0]);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const buyCoffee = async () => {
     try {
-      const {ethereum} = window;
+      const { ethereum } = window;
 
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum, "any");
@@ -72,11 +73,11 @@ export default function Home() {
           signer
         );
 
-        console.log("buying coffee..")
+        console.log("buying coffee..");
         const coffeeTxn = await coffeeByWallet.BuyCoffee(
           name ? name : "anon",
           message ? message : "Enjoy your coffee!",
-          {value: ethers.utils.parseEther("0.001")}
+          { value: ethers.utils.parseEther("0.001") }
         );
 
         await coffeeTxn.wait();
@@ -106,7 +107,7 @@ export default function Home() {
           contractABI,
           signer
         );
-        
+
         console.log("fetching memos from the blockchain..");
         const memos = await coffeeByWallet.getGifts();
         console.log("fetched!");
@@ -114,12 +115,11 @@ export default function Home() {
       } else {
         console.log("Metamask is not connected");
       }
-      
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
     let coffeeByWallet;
     isWalletConnected();
@@ -135,12 +135,12 @@ export default function Home() {
           address: from,
           timestamp: new Date(timestamp * 1000),
           message,
-          name
-        }
+          name,
+        },
       ]);
     };
 
-    const {ethereum} = window;
+    const { ethereum } = window;
 
     // Listen for new memo events.
     if (ethereum) {
@@ -159,81 +159,82 @@ export default function Home() {
       if (coffeeByWallet) {
         coffeeByWallet.off("buyCoffee", onNewMemo);
       }
-    }
+    };
   }, []);
-  
+
   return (
     <div className={styles.container}>
-        <title>Buy Aditya a Coffee!</title>
-        <meta name="description" content="Tipping site" />
-        <link rel="icon" href="/favicon.ico" />
+      <title>Buy Aditya a Coffee!</title>
+      <meta name="description" content="Tipping site" />
+      <link rel="icon" href="/favicon.ico" />
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Buy Aditya a Coffee!
-        </h1>
-        
+        <h2 className={styles.title}>Buy Aditya a Coffee!</h2>
+        <img className={styles.pfp} src={pfp} />
         {currentAccount ? (
-          <div>
+          <div className={styles.form}>
             <form>
               <div>
-                <label>
-                  Name
-                </label>
-                <br/>
-                
+                <label>Name</label>
+                <br />
+
                 <input
+                className={styles.name}
                   id="name"
                   type="text"
                   placeholder="anon"
                   onChange={onNameChange}
-                  />
+                />
               </div>
-              <br/>
+              <br />
               <div>
-                <label>
-                  Send Aditya a message
-                </label>
-                <br/>
+                <label>Send Aditya a message</label>
+                <br />
 
-                <textarea
+                <textarea 
+                className={styles.textarea}
                   rows={3}
                   placeholder="Enjoy your coffee!"
                   id="message"
                   onChange={onMessageChange}
                   required
-                >
-                </textarea>
+                ></textarea>
               </div>
               <div>
-                <button
-                  type="button"
-                  onClick={buyCoffee}
-                >
+                <button className={styles.connect} type="button" onClick={buyCoffee}>
                   Send 1 Coffee for 0.001ETH
                 </button>
               </div>
             </form>
           </div>
         ) : (
-          <button onClick={connectWallet}> Connect your wallet </button>
+          <button className={styles.connect} onClick={connectWallet}> Connect your wallet </button>
         )}
       </main>
 
-      {currentAccount && (<h1>Gifts received</h1>)}
+      {currentAccount && <h1>Gifts received</h1>}
 
-      {currentAccount && (memos.map((memo, idx) => {
-        return (
-          <div key={idx} style={{border:"2px solid", "borderRadius":"5px", padding: "5px", margin: "5px"}}>
-            <p style={{"fontWeight":"bold"}}>"{memo.message}"</p>
-            <p>From: {memo.name} at {memo.timestamp.toString()}</p>
-          </div>
-        )
-      }))}
+      {currentAccount &&
+        memos.map((memo, idx) => {
+          return (
+            <div
+              key={idx}
+              style={{
+                border: "2px solid",
+                borderRadius: "5px",
+                padding: "5px",
+                margin: "5px",
+              }}
+            >
+              <p style={{ fontWeight: "bold" }}>"{memo.message}"</p>
+              <p>
+                From: {memo.name} at {memo.timestamp.toString()}
+              </p>
+            </div>
+          );
+        })}
 
-      <footer className={styles.footer}>
-          Created with 💖by Aditya
-      </footer>
+      <footer className={styles.footer}>Created with 💖by Aditya</footer>
     </div>
-  )
+  );
 }
