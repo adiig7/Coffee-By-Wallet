@@ -5,14 +5,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+   /* background: rgb(36,244,255); */
+    background: linear-gradient(329deg, rgba(36,244,255,1) 0%, rgba(75,115,255,1) 35%, rgba(35,221,255,1) 70%, rgba(75,115,255,1) 100%);
 }
 
 .main {
-  padding: 5rem 0;
+  padding: 2rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -43,11 +45,105 @@
   text-decoration: underline;
 }
 
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+.pfp {
+  border-radius: 15px;
+  transition: ease-in-out 0.2s;
 }
+
+.pfp:hover {
+  transform: scale(.95);
+}
+
+.title {
+  margin: 25px;
+  line-height: 1.15;
+  font-size: 3rem;
+}
+
+
+.connect {
+  margin: 20px;
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  /* height: 48px; */
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+  /* width: ; */
+  padding: 15px 12px;
+}
+
+.connect:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.connect:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.connect:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+
+.form {
+  margin: 20px auto;
+  background-color: rgba(100, 175, 255, 0.739);
+  padding: 1rem 2rem;
+  /* font-size: 18px; */
+  border: 2px solid rgb(44, 67, 102);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 100px ;
+  font-size: 16px;
+  margin: 10px 0;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: 2px solid rgba(83, 238, 255, 0.768)
+}
+
+.name  {
+  width: 100%;
+  /* min-height: 100px ; */
+  font-size: 16px;
+  margin: 10px 0;
+  padding: 10px 0;
+  border: 2px solid rgba(83, 238, 255, 0.768);
+  border-radius: 8px;
+
+}
+
 
 .title,
 .description {
